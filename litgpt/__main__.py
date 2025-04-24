@@ -9,6 +9,7 @@ from litgpt.finetune.adapter import setup as finetune_adapter_fn
 from litgpt.finetune.adapter_v2 import setup as finetune_adapter_v2_fn
 from litgpt.finetune.full import setup as finetune_full_fn
 from litgpt.finetune.lora import setup as finetune_lora_fn
+from litgpt.finetune.qlora import setup as finetune_qlora_fn
 from litgpt.generate.adapter import main as generate_adapter_fn
 from litgpt.generate.adapter_v2 import main as generate_adapter_v2_fn
 from litgpt.generate.base import main as generate_base_fn
@@ -45,6 +46,7 @@ def main() -> None:
         "finetune": {
             "help": "Finetune a model with one of our existing methods.",
             "lora": {"help": "Finetune a model with LoRA.", "fn": finetune_lora_fn},
+            "qlora":  {"help": "Finetune a model with QLoRA (4-bit quantised LoRA).", "fn":  finetune_qlora_fn},
             "full": {"help": "Finetune a model.", "fn": finetune_full_fn},
             "adapter": {"help": "Finetune a model with Adapter.", "fn": finetune_adapter_fn},
             "adapter_v2": {"help": "Finetune a model with Adapter v2.", "fn": finetune_adapter_v2_fn},

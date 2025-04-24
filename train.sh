@@ -11,18 +11,36 @@ litgpt download \
 
 # Uncomment the following line and add your Huggingface Token here
 # Generate or retrieve your Huggingface Token at https://huggingface.co/settings/tokens
-# export HF_TOKEN=[YOUR_HF_TOKEN]
+export HF_TOKEN="my_token_here"
+export WANDB_API_KEY="my_token_here"
 
-# LoRA instruction tuning
-# Before finetuning, please run torch.cuda.is_bf16_supported(). If it returns False, set --precision 16-mixed to use a fp-16-based mixed precision
+
+# # LoRA instruction tuning
+# # Before finetuning, please run torch.cuda.is_bf16_supported(). If it returns False, set --precision 16-mixed to use a fp-16-based mixed precision
+# litgpt finetune lora \
+#   --data LIMA \
+#   --checkpoint_dir checkpoints/TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T \
+#   --out_dir out/tinyllama \
+#   --train.max_seq_length 512 \
+#   --train.epochs 15 \
+#   --train.lr_warmup_steps 10 \
+#   --precision bf16-true \
+#   --lora_r 8 \
+#   --lora_alpha 16 \
+#   --eval.interval 50 \
+#   --logger wandb
+
+
+# QLoRA instruction tuning
 litgpt finetune lora \
   --data LIMA \
   --checkpoint_dir checkpoints/TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T \
-  --out_dir out/tinyllama \
+  --out_dir out/tinyllama-qlora \
   --train.max_seq_length 512 \
   --train.epochs 15 \
   --train.lr_warmup_steps 10 \
   --precision bf16-true \
+  --quantize bnb.nf4-dq \
   --lora_r 8 \
   --lora_alpha 16 \
   --eval.interval 50 \
